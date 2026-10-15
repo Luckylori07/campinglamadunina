@@ -515,3 +515,9 @@ table.prices { width: 100%; border-collapse: collapse; font-size: 1.05rem; }
   .brand__name { font-size: 1.28rem; }
   .header__in { gap: 8px; }
 }
+
+/* Mappa incorporata (Google Maps) */
+.mapembed { border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: var(--salvia-soft); aspect-ratio: 4 / 3; box-shadow: 0 24px 40px -32px rgba(23,38,30,.55); }
+.mapembed iframe { width: 100%; height: 100%; border: 0; display: block; }
+.maps-two .mapembed { aspect-ratio: auto; height: 100%; min-height: 380px; }
+.maps-two .mapfig img { max-height: none; }

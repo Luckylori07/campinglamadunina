@@ -27,6 +27,7 @@ ADDR1, ADDR2 = "Via dei Martiri, 12", "21020 Varano Borghi (VA)"
 MAPS_Q = "https://www.google.com/maps/search/?api=1&query=Camping+La+Madunina%2C+Via+dei+Martiri+12%2C+21020+Varano+Borghi"
 MAPS_DIR = "https://www.google.com/maps/dir/?api=1&destination=Camping+La+Madunina%2C+Via+dei+Martiri+12%2C+21020+Varano+Borghi"
 OSM = "https://www.openstreetmap.org/relation/1314307"
+MAP_EMBED = "https://www.google.com/maps?q=Camping+La+Madunina%2C+Via+dei+Martiri+12%2C+21020+Varano+Borghi&z=15&output=embed&hl="
 
 PAGES = ["index", "campeggio", "sistemazioni", "servizi", "galleria", "prezzi", "cartina", "contatti", "faq", "privacy", "note-legali"]
 NAV = ["campeggio", "sistemazioni", "servizi", "prezzi", "galleria", "cartina"]
@@ -326,6 +327,11 @@ SERVICES = [  # (icona, chiave, fonte)
 ]
 
 
+def map_embed(c, cls=""):
+    return (f'<div class="mapembed{(" " + cls) if cls else ""}"><iframe src="{MAP_EMBED}{c.lang}" title="{c.t("map.title")}" '
+            f'loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>')
+
+
 def practical_dl(c):
     return f'''<dl class="dl">
 <div><dt>{ic("pin")}</dt><dd class="label">{c.t("lbl.address")}</dd><dd><a href="{MAPS_Q}" target="_blank" rel="noopener">{ADDR1}<br>{ADDR2}</a></dd></div>
@@ -471,7 +477,7 @@ def p_index(c):
 {practical_dl(c)}
 <div class="btn-row"><a class="btn" href="{MAPS_DIR}" target="_blank" rel="noopener">{ic("route")} {c.t("inf.directions")}</a><a class="btn btn--line" href="{c.href("cartina")}">{c.t("inf.map")}</a></div>
 </div>
-<figure class="mapfig rv" style="--i:2"><a href="{c.href("cartina")}">{c.site_img("cartina-zona", c.t("img.cartina.alt"))}</a><figcaption>{c.t("img.cartina.cap")}</figcaption></figure>
+<div class="rv" style="--i:2">{map_embed(c)}</div>
 </div>
 </section>
 
@@ -618,7 +624,7 @@ def p_cartina(c):
 <div class="wrap">
 <h2 id="m0" class="sr-only">{c.t("cartina.h1")}</h2>
 <div class="maps-two">
-<figure class="mapfig rv"><a href="{c.asset("assets/img/site/cartina-zona.webp")}" data-lightbox data-caption="{c.t("img.cartina.cap")}">{c.site_img("cartina-zona", c.t("img.cartina.alt"))}</a><figcaption>{c.t("img.cartina.cap")}</figcaption></figure>
+<div class="rv">{map_embed(c, "mapembed--tall")}</div>
 <figure class="mapfig rv" style="--i:2"><a href="{c.asset("assets/img/site/cartina-dettaglio.webp")}" data-lightbox data-caption="{c.t("img.dettaglio.cap")}">{c.site_img("cartina-dettaglio", c.t("img.dettaglio.alt"))}</a><figcaption>{c.t("img.dettaglio.cap")}</figcaption></figure>
 </div>
 <p class="small muted rv" style="margin-top:12px">{c.t("cartina.zoom")}</p>

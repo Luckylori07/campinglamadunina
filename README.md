@@ -28,7 +28,7 @@ en/  de/  fr/                                  ← stesse 11 pagine, stessi nomi
 assets/
   css/style.css            design system e componenti
   js/main.js               menu, lightbox, filtri, form, lingua preferita
-  img/site/                foto autentiche del campeggio (WebP) e cartine ingrandite
+  img/site/                foto del campeggio (WebP) e schema stradale ingrandito
   img/lake/                foto del Lago di Comabbio (WebP, 960 e 1920 px)
   img/originals/           file originali scaricati dal sito ufficiale + logo
   img/IMAGE_SOURCES.md     fonti e licenze di ogni immagine
@@ -129,8 +129,9 @@ tradotti nelle altre lingue (la dicitura esatta in italiano compare nelle pagine
   illustrative e non mostrano la struttura.
 - Nessuna fotografia autentica di tende/camper/roulotte: le categorie usano illustrazioni grafiche dichiarate come tali.
 - Nessun sistema di prenotazione né backend: il modulo apre il programma di posta (`mailto:`).
-- Nessuna mappa incorporata: si usano le cartine ufficiali + link a Google Maps/OpenStreetMap (nessuna coordinata
-  non verificata, nessun cookie di terzi caricato).
+- Mappa: embed di Google Maps (home e «Come arrivare») basato sull'indirizzo, senza coordinate non verificate, più lo
+  schema stradale (ingrandito 4×, qualità limitata dalla sorgente) e link a Google Maps/OpenStreetMap. L'embed carica
+  contenuti di Google (IP, cookie): è dichiarato in privacy; valutare un banner di consenso in fase di pubblicazione.
 - **Logo**: dal `logo-camp.jpg` fornito (128×94) è stato ritagliato l'ovale, ingrandito 4× e ricolorato con la palette del sito (verde bosco, ambra al posto del rosso). Resta di qualità limitata: va sostituito con il file vettoriale/ad alta risoluzione del cliente. Favicon e apple-touch-icon derivano dallo stesso logo.
 - Il selettore lingua porta alla pagina equivalente; la lingua scelta viene ricordata (`localStorage`) e, a una nuova
   visita, si viene portati alla lingua preferita (aggiungendo `?nolang` si disattiva).
