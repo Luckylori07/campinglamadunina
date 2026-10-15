@@ -125,7 +125,7 @@ h4 { font-size: 1.1rem; }
 .top.is-scrolled .header { box-shadow: 0 8px 28px -18px rgba(23, 38, 30, 0.5); }
 .header__in { display: flex; align-items: center; gap: 12px; min-height: 64px; width: min(1320px, 100% - 2 * var(--gutter)); margin-inline: auto; }
 .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: var(--bosco); margin-right: auto; }
-.brand__mark { width: 40px; height: 40px; flex: none; }
+.brand__mark { height: 52px; width: auto; flex: none; }
 .brand__txt { display: flex; flex-direction: column; line-height: 1; }
 .brand__sub { font-size: 0.72rem; font-weight: 700; color: var(--lago-deep); letter-spacing: 0.02em; margin-bottom: 3px; }
 .brand__name { font-family: var(--font-display); font-size: 1.45rem; font-weight: 520; letter-spacing: -0.02em; }
@@ -423,11 +423,11 @@ table.prices { width: 100%; border-collapse: collapse; font-size: 1.05rem; }
 .prices tbody tr:hover { background: var(--salvia-soft); }
 .prices .free { color: #1d4a28; }
 @media (max-width: 520px) { .prices th, .prices td { padding: 14px 16px; } .prices caption { padding: 18px 16px 6px; font-size: 1.3rem; } .prices td.num { font-size: 1.15rem; } }
-.pdf-card { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between; background: var(--bosco); color: #fff; border-radius: var(--radius); padding: 24px 28px; }
-.pdf-card h3 { color: #fff; margin: 0 0 4px; font-size: 1.3rem; }
-.pdf-card p { margin: 0; color: rgba(255,255,255,.8); font-size: 0.95rem; }
-.pdf-card .btn-row { flex: 0 1 auto; max-width: 100%; }
-@media (max-width: 560px) { .pdf-card .btn-row, .pdf-card .btn { width: 100%; } }
+.rate-card { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between; background: var(--bosco); color: #fff; border-radius: var(--radius); padding: 24px 28px; }
+.rate-card h3 { color: #fff; margin: 0 0 4px; font-size: 1.3rem; }
+.rate-card p { margin: 0; color: rgba(255,255,255,.8); font-size: 0.95rem; }
+.rate-card .btn-row { flex: 0 1 auto; max-width: 100%; }
+@media (max-width: 560px) { .rate-card .btn-row, .rate-card .btn { width: 100%; } }
 .terms { display: grid; gap: 12px; margin: 0 0 32px; }
 .terms li { display: flex; gap: 12px; align-items: flex-start; background: var(--bianco); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 14px 18px; }
 .terms .icon { color: var(--lago-deep); margin-top: 3px; width: 22px; height: 22px; }
@@ -508,3 +508,10 @@ table.prices { width: 100%; border-collapse: collapse; font-size: 1.05rem; }
 }
 
 @media print { .top, .wm, .burger { display: none !important; } }
+
+@media (max-width: 480px) {
+  .brand { gap: 8px; }
+  .brand__mark { height: 40px; }
+  .brand__name { font-size: 1.28rem; }
+  .header__in { gap: 8px; }
+}

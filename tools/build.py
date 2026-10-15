@@ -27,8 +27,6 @@ ADDR1, ADDR2 = "Via dei Martiri, 12", "21020 Varano Borghi (VA)"
 MAPS_Q = "https://www.google.com/maps/search/?api=1&query=Camping+La+Madunina%2C+Via+dei+Martiri+12%2C+21020+Varano+Borghi"
 MAPS_DIR = "https://www.google.com/maps/dir/?api=1&destination=Camping+La+Madunina%2C+Via+dei+Martiri+12%2C+21020+Varano+Borghi"
 OSM = "https://www.openstreetmap.org/relation/1314307"
-PDF_LOCAL = "assets/docs/listino-originale.pdf"
-PDF_ORIG = "https://www.campinglamadunina.com/lis/listino.pdf"
 
 PAGES = ["index", "campeggio", "sistemazioni", "servizi", "galleria", "prezzi", "cartina", "contatti", "faq", "privacy", "note-legali"]
 NAV = ["campeggio", "sistemazioni", "servizi", "prezzi", "galleria", "cartina"]
@@ -174,7 +172,7 @@ def header(c):
     return f'''<header class="header">
 <div class="header__in">
 <a class="brand" href="{c.href("index")}" aria-label="{c.t("brand.aria")}">
-<svg class="brand__mark" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#1f3b2d"/><path d="M10 44 32 14l22 30z" fill="#f2b134"/><path d="M32 14v30" stroke="#1f3b2d" stroke-width="3"/><path d="M8 50c5 0 5-3 10-3s5 3 10 3 5-3 10-3 5 3 10 3 5-3 8-3" fill="none" stroke="#bfe0ea" stroke-width="3.200" stroke-linecap="round"/><path d="M8 57c5 0 5-3 10-3s5 3 10 3 5-3 10-3 5 3 10 3" fill="none" stroke="#bfe0ea" stroke-width="3.200" stroke-linecap="round" opacity=".6"/></svg>
+<img class="brand__mark" src="{c.asset("assets/img/logo-madunina.webp")}" width="{dims("assets/img/logo-madunina.webp")[0]}" height="{dims("assets/img/logo-madunina.webp")[1]}" alt="" decoding="async">
 <span class="brand__txt"><span class="brand__sub">Camping</span><span class="brand__name">La Madunina</span></span></a>
 <button class="burger" type="button" aria-expanded="false" aria-controls="nav" aria-label="{c.t("js.menuOpen")}"><span></span></button>
 <nav id="nav" class="nav" aria-label="{c.t("nav.aria")}">{items}<a class="btn nav__cta" href="{c.href("contatti")}">{c.t("cta.info")}</a></nav>
@@ -193,14 +191,13 @@ def footer(c):
 <div class="wrap">
 <div class="footer__grid">
 <div>
-<a class="brand" href="{c.href("index")}" aria-label="{c.t("brand.aria")}"><svg class="brand__mark" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#f2b134"/><path d="M10 44 32 14l22 30z" fill="#1f3b2d"/><path d="M8 51c5 0 5-3 10-3s5 3 10 3 5-3 10-3 5 3 10 3 5-3 8-3" fill="none" stroke="#fff" stroke-width="3.200" stroke-linecap="round"/></svg><span class="brand__txt"><span class="brand__sub">Camping</span><span class="brand__name">La Madunina</span></span></a>
+<a class="brand" href="{c.href("index")}" aria-label="{c.t("brand.aria")}"><img class="brand__mark" src="{c.asset("assets/img/logo-madunina.webp")}" width="{dims("assets/img/logo-madunina.webp")[0]}" height="{dims("assets/img/logo-madunina.webp")[1]}" alt="" decoding="async"><span class="brand__txt"><span class="brand__sub">Camping</span><span class="brand__name">La Madunina</span></span></a>
 <address>{ADDR1}<br>{ADDR2}</address>
 <p class="small" style="margin-top:12px">{c.t("footer.tag")}</p>
 </div>
 <div><h2>{c.t("footer.explore")}</h2><ul>{links}</ul></div>
 <div><h2>{c.t("footer.info")}</h2><ul>
 <li><a href="{c.href("prezzi")}">{c.t("footer.prices")}</a></li>
-<li><a href="{c.asset(PDF_LOCAL)}" target="_blank" rel="noopener">{c.t("footer.pdf")}</a></li>
 <li><a href="{c.href("cartina")}">{c.t("footer.map")}</a></li>
 <li><a href="{c.href("contatti")}">{c.t("nav.contatti")}</a></li>
 </ul></div>
@@ -247,7 +244,7 @@ def head(c, extra=""):
 <meta property="og:image" content="{og_img}">
 <meta name="twitter:card" content="summary_large_image">
 {alts}<link rel="alternate" hreflang="x-default" href="{xdef}">
-<link rel="icon" href="{c.asset("assets/img/favicon.svg")}" type="image/svg+xml">
+<link rel="icon" href="{c.asset("assets/img/favicon.png")}" type="image/png">
 <link rel="icon" href="{c.asset("assets/img/favicon.ico")}" sizes="32x32">
 <link rel="apple-touch-icon" href="{c.asset("assets/img/apple-touch-icon.png")}">
 <link rel="preload" href="{c.asset("assets/fonts/fraunces-latin-opsz-normal.woff2")}" as="font" type="font/woff2" crossorigin>
@@ -311,10 +308,9 @@ def cta_final(c, img="tramonto-cigno", alt_key="img.cta.alt"):
 
 
 def tag(c, kind):
-    return {"off": f'<span class="tag tag--ok">{ic("check","icon")} {c.t("src.off")}</span>',
-            "pdf": f'<span class="tag tag--ok">{ic("check","icon")} {c.t("src.pdf")}</span>',
-            "third": f'<span class="tag tag--warn">{ic("alert","icon")} {c.t("src.third")}</span>',
-            "ask": f'<span class="tag tag--warn">{ic("alert","icon")} {c.t("src.ask")}</span>'}[kind]
+    if kind in ("off", "pdf"):
+        return ""  # informazione confermata: nessuna etichetta
+    return f'<span class="tag tag--warn">{ic("alert","icon")} {c.t("src.ask")}</span>'
 
 
 def svc_item(c, icon, key, kind, i=0):
@@ -538,7 +534,7 @@ def p_sistemazioni(c):
 {block("camper", "camper", "camper", True)}
 {block("roulotte", "caravan", "caravan", False, "pitch--lake")}
 <article class="rv" style="margin-top:28px"><div class="notice notice--info">{ic("info")}<div><p><strong>{c.t("sis.other.t")}</strong></p><p>{c.t("sis.other.d")}</p></div></div></article>
-<div class="pdf-card rv"><div><h3>{c.t("pdf.title")}</h3><p>{c.t("pdf.sub")}</p></div><div class="btn-row"><a class="btn" href="{c.href("prezzi")}">{c.t("sis.prices")} {ic("arrow")}</a></div></div>
+<div class="rate-card rv"><div><h3>{c.t("pdf.title")}</h3><p>{c.t("pdf.sub")}</p></div><div class="btn-row"><a class="btn" href="{c.href("prezzi")}">{c.t("sis.prices")} {ic("arrow")}</a></div></div>
 </div>
 </section>
 {cta_final(c, "ninfee-lago")}'''
@@ -553,7 +549,6 @@ def p_servizi(c):
 <section class="section" aria-labelledby="sv0">
 <div class="wrap">
 <div class="notice rv">{ic("info")}<div><p>{c.t("servizi.notice")}</p></div></div>
-<div class="rv" style="margin-bottom:28px"><span class="tag tag--ok">{ic("check")} {c.t("src.off")}</span> <span class="tag tag--ok">{ic("check")} {c.t("src.pdf")}</span> <span class="tag tag--warn">{ic("alert")} {c.t("src.third")}</span></div>
 <h2 id="sv0" class="sr-only">{c.t("servizi.h1")}</h2>
 {group("servizi.g1", [S_[k] for k in ("pool", "food", "games", "kids", "sport", "bike", "beach")])}
 {group("servizi.g2", [S_[k] for k in ("showers", "washer", "wifi")], 1)}
@@ -612,9 +607,6 @@ def p_prezzi(c):
 <li>{ic("info")}<span>{c.t("prezzi.t3")}</span></li>
 <li>{ic("info")}<span>{c.t("prezzi.t4")}</span></li>
 </ul>
-<div class="pdf-card rv"><div><h3>{c.t("pdf.title")}</h3><p>{c.t("prezzi.pdf.meta")}</p></div>
-<div class="btn-row"><a class="btn" href="{c.asset(PDF_LOCAL)}" target="_blank" rel="noopener">{ic("download")} {c.t("prezzi.pdf.open")}</a><a class="btn btn--light" href="{PDF_ORIG}" target="_blank" rel="noopener">{ic("ext")} {c.t("prezzi.pdf.orig")}</a></div></div>
-<p class="small muted rv" style="margin-top:22px">{c.t("prezzi.source")}</p>
 <div class="btn-row rv" style="margin-top:28px"><a class="btn" href="{c.href("contatti")}">{c.t("prezzi.ask")} {ic("arrow")}</a></div>
 </div>
 </section>'''
