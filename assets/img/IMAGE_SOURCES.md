@@ -24,12 +24,12 @@ leggera) senza aggiungere dettagli: restano visibilmente morbide se mostrate in 
 | `site/serata-pista.webp` | `thumbs/giochi.jpg` (179×119) | Discoteca | didascalia del sito: «Discoteca»; mostrata come «Serata sulla pista da ballo» |
 | `site/pista-ciclabile.webp` | `thumbs/Il-lago.jpg` (170×120) | Pista ciclabile | |
 | `site/tramonto.webp` | `tramonto-su-lago.jpg` (249×150) | Tramonto sul Lago | cornice ritagliata |
-| `site/cartina-zona.webp` | `cartina.gif` (380×380) | cartina ufficiale | ingrandita 2× |
-| `site/cartina-dettaglio.webp` | `cartina2p.jpg` (215×180) | schema stradale ufficiale | ingrandito 3× |
+| `site/cartina-dettaglio.webp` | `cartina2p.jpg` (215×180) | schema stradale ufficiale | ingrandito 4× (Lanczos + nitidezza) |
 
-Il logo `logo-camp.jpg` (fornito nella repository, 128×94) e `imm/logo.gif` (logotipo originale) sono conservati
-in `assets/img/originals/`. L'header della demo usa un marchio ridisegnato (tenda + onde, SVG) come proposta di
-restyling: l'uso del logo originale va deciso con il cliente.
+**Logo**: `assets/img/originals/logo-camp.jpg` (fornito nella repository, 128×94, ovale «Campeggio ★★★» su fondo blu).
+`tools/prepare_logo.py` ritaglia l'ovale, lo ingrandisce 4× e ne ricolora verde e rosso con la palette del sito
+→ `assets/img/logo-madunina.{png,webp}`, favicon e apple-touch-icon. Qualità limitata dalla sorgente: da sostituire con
+il file ad alta risoluzione del cliente.
 
 ## 2. Fotografie del Lago di Comabbio (Wikimedia Commons)
 

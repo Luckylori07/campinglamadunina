@@ -61,10 +61,7 @@ if len(sys.argv) > 1:
             r = im.resize((width, round(im.height * width / im.width)), Image.LANCZOS)
             save(r, lake / f"{slug}-{width}.webp", 74 if width == 1920 else 72)
 
-# Cartine ufficiali: ingrandimento 2x/3x (le originali sono 380x380 e 215x180)
-a = Image.open(orig / "cartina.gif").convert("RGB")
-a = a.resize((a.width * 2, a.height * 2), Image.LANCZOS)
-a.save(site / "cartina-zona.webp", quality=82, method=6)
+# Schema stradale: ingrandimento 4x (l'originale è 215x180)
 b = Image.open(orig / "cartina2p.jpg").convert("RGB")
-b = b.resize((b.width * 3, b.height * 3), Image.LANCZOS).filter(ImageFilter.UnsharpMask(1.2, 70, 2))
-b.save(site / "cartina-dettaglio.webp", quality=84, method=6)
+b = b.resize((b.width * 4, b.height * 4), Image.LANCZOS).filter(ImageFilter.UnsharpMask(2.5, 110, 3))
+b.save(site / "cartina-dettaglio.webp", quality=86, method=6)
